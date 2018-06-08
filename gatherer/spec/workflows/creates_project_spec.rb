@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe CreatesProject do
   let(:creator) do
     CreatesProject.new(
-      name: 'Project Runway',
+      name: name,
       task_string: task_string
     )
   end
+  let(:name) { 'Project Runway' }
 
   describe 'initialization' do
     let(:task_string) { '' }
@@ -113,6 +114,16 @@ RSpec.describe CreatesProject do
 
       specify { expect(creator.project.tasks.size).to eq(2) }
       specify { expect(creator.project).not_to be_a_new_record }
+    end
+  end
+
+  describe 'failure cases' do
+    let(:name) { '' }
+    let(:task_string) { '' }
+    before(:example) { creator.create }
+
+    it 'fails when trying to save a project with no name' do
+      expect(creator).not_to be_a_success
     end
   end
 end
