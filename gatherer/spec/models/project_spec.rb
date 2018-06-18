@@ -2,32 +2,34 @@ require 'rails_helper'
 
 RSpec.describe Project do
   describe 'completion' do
-    let(:project) { Project.new }
-    let(:task) { Task.new }
+    describe 'without a task' do
+      let(:project) { FactoryBot.build_stubbed(:project) }
 
-    it 'considers a project with no tasks to be done' do
-      expect(project).to be_done
+      it 'considers a project with no tasks to be done' do
+        expect(project).to be_done
+      end
+
+      it 'properly handles a blank project', :aggregate_failures do
+        expect(project.completed_velocity).to eq(0)
+        expect(project.current_rate).to eq(0)
+        expect(project.projected_days_remaining).to be_nan
+        expect(project).not_to be_on_schedule
+      end
     end
 
-    it 'knows that a project with an incomplete task is not done' do
-      project.tasks << task
+    describe 'with a task' do
+      let(:project) { FactoryBot.build_stubbed(:project, tasks: [task]) }
+      let(:task) { FactoryBot.build_stubbed(:task) }
 
-      expect(project).not_to be_done
-    end
+      it 'knows that a project with an incomplete task is not done' do
+        expect(project).not_to be_done
+      end
 
-    it 'marks a project done if its tasks are done' do
-      project.tasks << task
+      it 'marks a project done if its tasks are done' do
+        task.mark_completed
 
-      task.mark_completed
-
-      expect(project).to be_done
-    end
-
-    it "properly handles a blank project" do
-      expect(project.completed_velocity).to eq(0)
-      expect(project.current_rate).to eq(0)
-      expect(project.projected_days_remaining).to be_nan
-      expect(project).not_to be_on_schedule
+        expect(project).to be_done
+      end
     end
   end
 
