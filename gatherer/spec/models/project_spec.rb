@@ -98,4 +98,20 @@ RSpec.describe Project do
       expect(task.points_toward_velocity).to eq(0)
     end
   end
+
+  describe 'task order' do
+    let(:project) { create(:project, name: 'Project') }
+
+    it 'makes 1 the order of the first task in an entry project' do
+      expect(project.next_task_order).to eq(1)
+    end
+
+    it 'gives the order of the next task as one or more than the highest' do
+      project.tasks.create(project_order: 1)
+      project.tasks.create(project_order: 3)
+      project.tasks.create(project_order: 2)
+
+      expect(project.next_task_order).to eq(4)
+    end
+  end
 end
