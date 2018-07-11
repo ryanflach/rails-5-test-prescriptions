@@ -24,7 +24,7 @@ RSpec.describe 'adding a new task' do
     end
 
     expect(current_path).to eq(project_path(project))
-    within('#task2') do
+    within('#task_2') do
       expect(page).to have_selector('.name', text: 'Find UFOs')
     end
   end
