@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7.0'
   gem 'pry'
   gem 'factory_bot_rails'
+  gem 'cucumber-rails', require: false
 end
 
 group :development do
@@ -60,6 +61,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'capybara-screenshot'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
