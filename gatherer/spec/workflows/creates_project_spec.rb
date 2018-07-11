@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CreatesProject do
   let(:creator) do
     CreatesProject.new(
-      name: name,
+      name:        name,
       task_string: task_string
     )
   end

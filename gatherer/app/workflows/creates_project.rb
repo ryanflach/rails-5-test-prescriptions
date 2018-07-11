@@ -30,7 +30,7 @@ class CreatesProject
     task_string.split("\n").map do |raw_task|
       title, size = raw_task.split(':')
 
-      Task.new(title: title, size: size_as_integer(size))
+      Task.new(title: title, size: size_as_integer(size), project: project)
     end
   end
 
