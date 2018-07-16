@@ -1,11 +1,24 @@
 {
   "name": "gatherer",
   "private": true,
+  "scripts": {
+    "test": "NODE_ENV=test karma start"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "jquery": "^3.3.1"
   },
   "devDependencies": {
+    "jasmine": "^3.1.0",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^3.0.0",
+    "testdouble": "^3.8.1",
+    "testdouble-jasmine": "^0.2.1",
     "webpack-dev-server": "2.11.2"
   }
 }
